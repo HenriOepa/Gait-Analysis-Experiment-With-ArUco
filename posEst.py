@@ -1,4 +1,3 @@
-#python posEst.py -v test_vid3.mp4 -m calMtx.npy -s 10
 #python posEst.py -v [videoPath] -m [calibrationMatrix] -s [sizeOfMarker]
 #python posEst.py -v cam1.tts -m labMtx.npy -s 100
 
