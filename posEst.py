@@ -1,3 +1,4 @@
+#python posEst.py -v test_vid3.mp4 -m calMtx.npy -s 10
 #python posEst.py -v [videoPath] -m [calibrationMatrix] -s [sizeOfMarker]
 #python posEst.py -v cam1.tts -m labMtx.npy -s 100
 
@@ -41,8 +42,16 @@ user32 = ctypes.windll.user32
 #Set below, value will be either "", "video" or "camera"
 vidOrCam = ""
 
+#Check if video parameter is gives, assume camera if can't get length
 try:
-    #Try to open video from path provided
+    len(args["video"])
+    vidOrCam = "video"
+except:
+    vidOrCam = "camera"
+
+    
+if vidOrCam == "video":
+    #Open video from path provided
     cap = cv2.VideoCapture(args["video"])
     #Get video resolution
     vid_width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -68,16 +77,13 @@ try:
         cv2.moveWindow('frame', int((user32.GetSystemMetrics(0) - (user32.GetSystemMetrics(0) * 0.75))/ 2), int((user32.GetSystemMetrics(1) - screensizeHeight) / 2))
         cv2.resizeWindow('frame', int(user32.GetSystemMetrics(0) * 0.75), screensizeHeight)
 
-    vidOrCam = "video"
-
-except:
+else:
     #If video is not found, try to open web cam
     try:
         cap = cv2.VideoCapture(0)
-        vidOrCam = "camera"
     except:
+        #Quit the program if nothing webcam nor video could be opened
         print("ERROR: Camera could not be opened")
-        vidOrCam = ""
         quit()
 
 #For getting information about the system
