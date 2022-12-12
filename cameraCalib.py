@@ -1,6 +1,6 @@
 #Checkerboard can be generated using https://calib.io/pages/camera-calibration-pattern-generator
 #  python cameraCalib.py -v [vid path] -cb 14X6 -cbs 50 
-#python cameraCalib.py -v [video path] -cb 20X10 -cbs [checkerboard square side length in mm]
+#python cameraCalib.py -v [video path] -cb [checkerboard width]X[checkerboard height] -cbs [checkerboard square side length in mm]
 
 from re import T
 import numpy as np
